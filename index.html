@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MD Mohibul Islam - Mixologist & Restaurateur</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>MD Mohibul Islam - Mixologist & Restaurant Consultant</title>
     <style>
         * {
             margin: 0;
@@ -13,53 +12,54 @@
         }
 
         :root {
-            --primary-dark: #1a1a1a;
-            --secondary-dark: #2a2a2a;
-            --accent-warm: #c4a484;
-            --accent-cool: #8b9dc3;
-            --text-primary: #333;
-            --text-secondary: #666;
-            --text-light: #999;
-            --bg-light: #fafafa;
-            --bg-white: #ffffff;
-            --border-light: #e5e5e5;
-            --shadow: 0 4px 20px rgba(0,0,0,0.08);
-            --shadow-hover: 0 8px 30px rgba(0,0,0,0.12);
+            --primary-gold: #D4AF37;
+            --dark-bg: #1a1a1a;
+            --light-text: #f5f5f5;
+            --accent-gray: #2a2a2a;
+            --subtle-gray: #666;
+            --glass-bg: rgba(42, 42, 42, 0.8);
         }
 
         body {
-            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: var(--light-text);
             line-height: 1.6;
-            color: var(--text-primary);
-            background: var(--bg-light);
             overflow-x: hidden;
         }
 
-        /* Header */
-        header {
-            background: var(--bg-white);
-            box-shadow: var(--shadow);
+        /* Navigation */
+        nav {
             position: fixed;
             top: 0;
             width: 100%;
-            z-index: 1000;
+            background: rgba(26, 26, 26, 0.95);
             backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
         }
 
-        nav {
+        nav.scrolled {
+            background: rgba(26, 26, 26, 0.98);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0 2rem;
         }
 
         .logo {
-            font-weight: 600;
-            font-size: 1.25rem;
-            color: var(--primary-dark);
-            letter-spacing: -0.5px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-gold);
+            text-decoration: none;
+            transition: all 0.3s ease;
         }
 
         .nav-links {
@@ -69,25 +69,24 @@
         }
 
         .nav-links a {
+            color: var(--light-text);
             text-decoration: none;
-            color: var(--text-secondary);
-            font-weight: 400;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
             position: relative;
         }
 
         .nav-links a:hover {
-            color: var(--accent-warm);
+            color: var(--primary-gold);
         }
 
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -4px;
+            bottom: -5px;
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--accent-warm);
+            background: var(--primary-gold);
             transition: width 0.3s ease;
         }
 
@@ -95,133 +94,92 @@
             width: 100%;
         }
 
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--light-text);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
         /* Hero Section */
         .hero {
-            margin-top: 80px;
-            padding: 4rem 2rem;
-            background: linear-gradient(135deg, var(--bg-white) 0%, var(--bg-light) 100%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
             position: relative;
-            overflow: hidden;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(45, 45, 45, 0.9));
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 40%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(196, 164, 132, 0.05), transparent);
-            transform: rotate(15deg);
-            animation: float 20s infinite ease-in-out;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 50%);
+            z-index: -1;
         }
 
-        @keyframes float {
-            0%, 100% { transform: rotate(15deg) translateY(0); }
-            50% { transform: rotate(15deg) translateY(-20px); }
-        }
-
-        .hero-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .hero-text h1 {
-            font-size: 3.5rem;
-            font-weight: 300;
-            line-height: 1.2;
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
             margin-bottom: 1rem;
-            color: var(--primary-dark);
-            letter-spacing: -2px;
+            background: linear-gradient(45deg, var(--primary-gold), #f4e4a6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .hero-text .accent {
-            color: var(--accent-warm);
-            font-weight: 500;
-        }
-
-        .hero-text p {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
+        .hero-content p {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
             margin-bottom: 2rem;
-            font-weight: 300;
+            color: var(--subtle-gray);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .hero-image {
-            position: relative;
-            justify-self: center;
-        }
-
-        .hero-image::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            border: 2px solid var(--accent-warm);
-            border-radius: 50%;
-            opacity: 0.3;
-        }
-
-        .profile-img {
-            width: 280px;
-            height: 280px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--bg-white);
-            box-shadow: var(--shadow-hover);
-            transition: transform 0.3s ease;
-        }
-
-        .profile-img:hover {
-            transform: scale(1.02);
-        }
-
-        /* Social Links */
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .social-link {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--bg-white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, var(--primary-gold), #f4e4a6);
+            color: var(--dark-bg);
             text-decoration: none;
-            color: var(--text-secondary);
-            box-shadow: var(--shadow);
+            border-radius: 50px;
+            font-weight: bold;
             transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
         }
 
-        .social-link:hover {
+        .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
-            color: var(--accent-warm);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
         }
 
-        /* Sections */
+        /* Section Styles */
         .section {
-            padding: 4rem 2rem;
+            padding: 5rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .section-title {
             font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 3rem;
             text-align: center;
-            color: var(--primary-dark);
+            margin-bottom: 3rem;
+            color: var(--primary-gold);
             position: relative;
         }
 
@@ -233,76 +191,94 @@
             transform: translateX(-50%);
             width: 60px;
             height: 3px;
-            background: linear-gradient(90deg, var(--accent-warm), var(--accent-cool));
-            border-radius: 2px;
+            background: var(--primary-gold);
         }
 
         /* About Section */
         .about-content {
-            background: var(--bg-white);
-            padding: 3rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: var(--accent-gray);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--subtle-gray);
+            border: 2px solid var(--primary-gold);
+        }
+
+        .about-text {
             font-size: 1.1rem;
             line-height: 1.8;
-            color: var(--text-secondary);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: var(--glass-bg);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-gold);
+            display: block;
         }
 
         /* Experience Section */
-        .experience-grid {
-            display: grid;
-            gap: 2rem;
+        .experience-timeline {
+            position: relative;
+            margin: 3rem 0;
         }
 
-        .experience-item {
-            background: var(--bg-white);
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-left: 4px solid var(--accent-warm);
+        .timeline-item {
+            background: var(--glass-bg);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 15px;
+            border-left: 4px solid var(--primary-gold);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
 
-        .experience-item:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
+        .timeline-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        .experience-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .experience-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--primary-dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .experience-company {
-            font-size: 1.1rem;
-            color: var(--accent-warm);
-            font-weight: 500;
-        }
-
-        .experience-period {
-            background: var(--bg-light);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+        .timeline-date {
+            color: var(--primary-gold);
+            font-weight: bold;
             font-size: 0.9rem;
-            color: var(--text-secondary);
-            font-weight: 500;
         }
 
-        .experience-location {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            margin-top: 0.5rem;
+        .timeline-title {
+            font-size: 1.3rem;
+            margin: 0.5rem 0;
+            color: var(--light-text);
+        }
+
+        .timeline-company {
+            color: var(--subtle-gray);
+            margin-bottom: 1rem;
         }
 
         /* Skills Section */
@@ -313,451 +289,508 @@
         }
 
         .skill-category {
-            background: var(--bg-white);
+            background: var(--glass-bg);
             padding: 2rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .skill-category:hover {
-            transform: translateY(-3px);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
         }
 
         .skill-category h3 {
-            color: var(--primary-dark);
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
-            font-weight: 600;
+            color: var(--primary-gold);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
         }
 
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            justify-content: center;
-        }
-
-        .skill-tag {
-            background: var(--bg-light);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-light);
-            transition: all 0.3s ease;
-        }
-
-        .skill-tag:hover {
-            background: var(--accent-warm);
-            color: white;
-            border-color: var(--accent-warm);
-        }
-
-        /* Accomplishments */
-        .accomplishments {
-            background: var(--primary-dark);
-            color: white;
-            border-radius: 12px;
-            padding: 3rem;
-            margin: 2rem 0;
-        }
-
-        .accomplishments h3 {
-            color: var(--accent-warm);
-            margin-bottom: 2rem;
-            font-size: 1.5rem;
-        }
-
-        .accomplishments ul {
+        .skill-list {
             list-style: none;
-            space-y: 1rem;
         }
 
-        .accomplishments li {
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            position: relative;
-            padding-left: 2rem;
+        .skill-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .accomplishments li::before {
-            content: '✦';
-            position: absolute;
-            left: 0;
-            color: var(--accent-warm);
-            font-size: 1.2rem;
-        }
-
-        .accomplishments li:last-child {
+        .skill-list li:last-child {
             border-bottom: none;
         }
 
-        /* Contact Section */
-        .contact-grid {
+        /* Awards Section */
+        .awards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
 
-        .contact-item {
-            background: var(--bg-white);
+        .award-item {
+            background: var(--glass-bg);
             padding: 2rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
+            border-radius: 15px;
             text-align: center;
-            transition: transform 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
         }
 
-        .contact-item:hover {
-            transform: translateY(-3px);
+        .award-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .award-icon {
+            font-size: 3rem;
+            color: var(--primary-gold);
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            background: var(--glass-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
         }
 
         .contact-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--accent-warm);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
             font-size: 1.5rem;
-            color: white;
+            color: var(--primary-gold);
+            margin-right: 1rem;
+            width: 30px;
+        }
+
+        .contact-form {
+            background: var(--glass-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-gold);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            color: var(--light-text);
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
         }
 
         /* Footer */
         footer {
-            background: var(--primary-dark);
-            color: white;
             text-align: center;
             padding: 2rem;
-            margin-top: 4rem;
+            background: var(--dark-bg);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 2rem;
-            }
-
-            .hero-text h1 {
-                font-size: 2.5rem;
-            }
-
             .nav-links {
                 display: none;
             }
 
+            .mobile-menu {
+                display: flex;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
             .section {
-                padding: 2rem 1rem;
-            }
-
-            .experience-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .profile-img {
-                width: 200px;
-                height: 200px;
+                padding: 3rem 1rem;
             }
         }
 
-        /* Smooth scroll */
-        html {
-            scroll-behavior: smooth;
+        @media (max-width: 480px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
         }
 
-        /* Loading animation */
+        /* Scroll animations */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
-            animation: fadeInUp 0.8s ease forwards;
+            transition: all 0.6s ease;
         }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        /* Staggered animations */
-        .experience-item:nth-child(1) { animation-delay: 0.1s; }
-        .experience-item:nth-child(2) { animation-delay: 0.2s; }
-        .experience-item:nth-child(3) { animation-delay: 0.3s; }
-        .experience-item:nth-child(4) { animation-delay: 0.4s; }
-        .experience-item:nth-child(5) { animation-delay: 0.5s; }
-
-        .skill-category:nth-child(1) { animation-delay: 0.1s; }
-        .skill-category:nth-child(2) { animation-delay: 0.2s; }
-        .skill-category:nth-child(3) { animation-delay: 0.3s; }
-        .skill-category:nth-child(4) { animation-delay: 0.4s; }
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">MD Mohibul Islam</div>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">MI</a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#skills">Skills</a></li>
+                <li><a href="#awards">Awards</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-        </nav>
-    </header>
-
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1>Innovative <span class="accent">Mixologist</span><br>& Restaurateur</h1>
-                <p>Crafting exceptional experiences through minimalistic elegance and deep understanding of flavor profiles</p>
-                <div class="social-links">
-                    <a href="https://www.linkedin.com/in/mirony007" class="social-link" target="_blank">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                        </svg>
-                    </a>
-                    <a href="mailto:mirony@hotmail.my" class="social-link">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.904.732-1.636 1.636-1.636h.033L12 10.545l10.331-6.724h.033c.904 0 1.636.732 1.636 1.636z"/>
-                        </svg>
-                    </a>
-                    <a href="tel:+358449233310" class="social-link">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M22.05 18.25c-.012.84-.706 1.54-1.546 1.54-9.942 0-18-8.058-18-18 0-.84.7-1.534 1.54-1.546C5.29.232 6.56 1.45 6.56 2.69v3.83c0 .96-.58 1.82-1.47 2.18l-1.73.7c-.15.06-.25.2-.25.36 0 2.13 1.73 3.86 3.86 3.86.16 0 .3-.1.36-.25l.7-1.73c.36-.89 1.22-1.47 2.18-1.47h3.83c1.24 0 2.458 1.27 2.446 2.516z"/>
-                        </svg>
-                    </a>
-                </div>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-            <div class="hero-image">
-                <!-- Placeholder for profile image - you can replace this with your actual photo -->
-                <div style="width: 280px; height: 280px; border-radius: 50%; background: linear-gradient(135deg, var(--accent-warm), var(--accent-cool)); display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white; font-weight: 300; border: 4px solid var(--bg-white); box-shadow: var(--shadow-hover);">
-                    MI
-                </div>
-                <!-- Uncomment and replace with your actual photo:
-                <img src="path/to/your/photo.jpg" alt="MD Mohibul Islam" class="profile-img">
-                -->
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content fade-in">
+            <h1>MD Mohibul Islam</h1>
+            <p>Innovative Mixologist & Restaurant Consultant</p>
+            <p>Over a decade of experience crafting exceptional experiences in the F&B industry</p>
+            <a href="#contact" class="cta-button">Let's Work Together</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <h2 class="section-title fade-in">About Me</h2>
+        <div class="about-content">
+            <div class="about-image fade-in">
+                Professional Photo
+            </div>
+            <div class="about-text fade-in">
+                <p>Innovative restauranteur and mixologist with over a decade of experience in the food and beverage industry, specializing in crafting innovative cocktails and providing comprehensive consultancy services to restaurants and bars.</p>
+                
+                <p>Renowned for a minimalistic yet elegant approach to drink design and a deep understanding of flavor profiles, which has significantly enhanced customer satisfaction and business growth. My proven track record spans menu development, staff training, and operational improvements, coupled with a strategic mindset aimed at elevating the dining experience.</p>
+                
+                <p>Currently serving as Food & Beverage Specialist and Restaurant Manager at Sunborn Saga Oy in Finland, I continue to push boundaries in hospitality excellence.</p>
+            </div>
+        </div>
+        
+        <div class="stats fade-in">
+            <div class="stat-item">
+                <span class="stat-number">10+</span>
+                Years Experience
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">15+</span>
+                Establishments Consulted
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">5</span>
+                Languages Spoken
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">50+</span>
+                Signature Cocktails
             </div>
         </div>
     </section>
 
-    <section class="section" id="about">
-        <h2 class="section-title">About</h2>
-        <div class="about-content fade-in">
-            <p>With over a decade of experience in the food and beverage industry, I am an innovative restaurateur and mixologist specializing in crafting exceptional cocktails and providing comprehensive consultancy services. My minimalistic yet elegant approach to drink design, combined with a deep understanding of flavor profiles, has significantly enhanced customer satisfaction and business growth across multiple establishments.</p>
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <h2 class="section-title fade-in">Professional Experience</h2>
+        <div class="experience-timeline">
+            <div class="timeline-item fade-in">
+                <div class="timeline-date">07/2024 - Present</div>
+                <h3 class="timeline-title">Food & Beverage Specialist, Restaurant Manager</h3>
+                <div class="timeline-company">Sunborn Saga Oy (Naantali Hotel & Spa) | Finland</div>
+                <p>Leading F&B operations at a premier hotel and spa, focusing on delivering exceptional guest experiences and operational excellence.</p>
+            </div>
             
-            <p>Currently based in Naantali, Finland, I bring a unique blend of Asian heritage and Nordic sensibilities to my work. My journey has taken me from Malaysia to Finland, allowing me to develop a truly international perspective on hospitality and mixology.</p>
+            <div class="timeline-item fade-in">
+                <div class="timeline-date">04/2023 - Present</div>
+                <h3 class="timeline-title">Founder & Head Consultant</h3>
+                <div class="timeline-company">Mixed It Right | Bar & Restaurant Consultancy | Malaysia</div>
+                <p>Providing comprehensive consultancy services to restaurants and bars across Malaysia, specializing in menu development, operations optimization, and staff training.</p>
+            </div>
             
-            <div class="accomplishments">
-                <h3>Key Accomplishments</h3>
-                <ul>
-                    <li>Featured by The Glenlivet as one of "The Original Rebels 2023" for pioneering spirit in mixology</li>
-                    <li>Named "Bartender of the Year 2023" by The Panda Bartender</li>
-                    <li>Recognized by Timeout Asia - establishment listed among "Top 4 Sustainable Bars in Malaysia"</li>
-                    <li>Featured by First-class Malaysia in "Top 6 Sustainable Bars in Kuala Lumpur"</li>
+            <div class="timeline-item fade-in">
+                <div class="timeline-date">10/2020 - 12/2023</div>
+                <h3 class="timeline-title">Founder & Head of Culinary</h3>
+                <div class="timeline-company">Canvass Bistro & Cocktail Bar | Kuala Lumpur</div>
+                <p>Established and operated a successful bistro and cocktail bar, recognized for innovative cocktails and sustainable practices.</p>
+            </div>
+            
+            <div class="timeline-item fade-in">
+                <div class="timeline-date">07/2022 - 12/2023</div>
+                <h3 class="timeline-title">Brand Ambassador</h3>
+                <div class="timeline-company">Husk Distillers "Ink Gin" | Malaysia & Thailand</div>
+                <p>Represented premium gin brand across Southeast Asia, conducting masterclasses and developing market presence.</p>
+            </div>
+            
+            <div class="timeline-item fade-in">
+                <div class="timeline-date">07/2015 - 03/2020</div>
+                <h3 class="timeline-title">Restaurant, Bar Manager & Head Mixologist</h3>
+                <div class="timeline-company">Pinchos Tapas Bar | Kuala Lumpur</div>
+                <p>Progressed from bartender to head mixologist and bar manager, developing innovative cocktail programs and managing operations.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <h2 class="section-title fade-in">Expertise</h2>
+        <div class="skills-grid">
+            <div class="skill-category fade-in">
+                <h3>Mixology & Beverage</h3>
+                <ul class="skill-list">
+                    <li>Craft Cocktail Development</li>
+                    <li>Molecular Mixology</li>
+                    <li>Wine & Spirits Knowledge</li>
+                    <li>Menu Engineering</li>
+                    <li>Flavor Profiling</li>
+                </ul>
+            </div>
+            
+            <div class="skill-category fade-in">
+                <h3>Consultancy</h3>
+                <ul class="skill-list">
+                    <li>Restaurant Operations</li>
+                    <li>Staff Training & Development</li>
+                    <li>Menu Development</li>
+                    <li>Cost Optimization</li>
+                    <li>Brand Development</li>
+                </ul>
+            </div>
+            
+            <div class="skill-category fade-in">
+                <h3>Management</h3>
+                <ul class="skill-list">
+                    <li>Operations Management</li>
+                    <li>Team Leadership</li>
+                    <li>Customer Service</li>
+                    <li>Quality Control</li>
+                    <li>Strategic Planning</li>
+                </ul>
+            </div>
+            
+            <div class="skill-category fade-in">
+                <h3>Languages</h3>
+                <ul class="skill-list">
+                    <li>English - Fluent</li>
+                    <li>Bengali - Native</li>
+                    <li>Hindi - Fluent</li>
+                    <li>Spanish - Good</li>
+                    <li>Malay - Good</li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <section class="section" id="experience">
-        <h2 class="section-title">Experience</h2>
-        <div class="experience-grid">
-            <div class="experience-item fade-in">
-                <div class="experience-header">
-                    <div>
-                        <div class="experience-title">Food & Beverage Specialist, Restaurant Manager</div>
-                        <div class="experience-company">Sunborn Saga Oy (Naantali Hotel & Spa)</div>
-                        <div class="experience-location">Naantali, Finland</div>
-                    </div>
-                    <div class="experience-period">07/2024 - Present</div>
-                </div>
+    <!-- Awards Section -->
+    <section id="awards" class="section">
+        <h2 class="section-title fade-in">Recognition & Awards</h2>
+        <div class="awards-grid">
+            <div class="award-item fade-in">
+                <div class="award-icon">🏆</div>
+                <h3>Bartender of the Year 2023</h3>
+                <p>Recognized by The Panda Bartender for excellence in mixology and innovation in the global bartending community.</p>
             </div>
-
-            <div class="experience-item fade-in">
-                <div class="experience-header">
-                    <div>
-                        <div class="experience-title">Founder & Head Consultant</div>
-                        <div class="experience-company">Mixed It Right | Bar & Restaurant Consultancy</div>
-                        <div class="experience-location">Malaysia</div>
-                    </div>
-                    <div class="experience-period">04/2023 - Present</div>
-                </div>
+            
+            <div class="award-item fade-in">
+                <div class="award-icon">⭐</div>
+                <h3>The Original Rebels 2023</h3>
+                <p>Featured by The Glenlivet as one of "The Original Rebels 2023" for pioneering spirit in mixology and bar consultancy.</p>
             </div>
-
-            <div class="experience-item fade-in">
-                <div class="experience-header">
-                    <div>
-                        <div class="experience-title">Founder & Head of Culinary</div>
-                        <div class="experience-company">Canvass Bistro & Cocktail Bar</div>
-                        <div class="experience-location">Kuala Lumpur, Malaysia</div>
-                    </div>
-                    <div class="experience-period">10/2020 - 12/2023</div>
-                </div>
-            </div>
-
-            <div class="experience-item fade-in">
-                <div class="experience-header">
-                    <div>
-                        <div class="experience-title">Brand Ambassador</div>
-                        <div class="experience-company">Husk Distillers "Ink Gin"</div>
-                        <div class="experience-location">Malaysia & Thailand</div>
-                    </div>
-                    <div class="experience-period">07/2022 - 12/2023</div>
-                </div>
-            </div>
-
-            <div class="experience-item fade-in">
-                <div class="experience-header">
-                    <div>
-                        <div class="experience-title">Head Consultant</div>
-                        <div class="experience-company">Artisan Bar Consultancy</div>
-                        <div class="experience-location">Malaysia</div>
-                    </div>
-                    <div class="experience-period">03/2016 - 11/2019</div>
-                </div>
+            
+            <div class="award-item fade-in">
+                <div class="award-icon">🌱</div>
+                <h3>Top Sustainable Bars</h3>
+                <p>Listed among "Top 4 Sustainable Bars in Malaysia" by Timeout Asia and "Top 6 Sustainable Bars in Kuala Lumpur" by First-class Malaysia.</p>
             </div>
         </div>
     </section>
 
-    <section class="section" id="skills">
-        <h2 class="section-title">Skills & Expertise</h2>
-        <div class="skills-grid">
-            <div class="skill-category fade-in">
-                <h3>Mixology & Bar Management</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">Craft Cocktails</span>
-                    <span class="skill-tag">Molecular Mixology</span>
-                    <span class="skill-tag">Menu Development</span>
-                    <span class="skill-tag">Bar Operations</span>
-                    <span class="skill-tag">Sommelier</span>
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <h2 class="section-title fade-in">Get In Touch</h2>
+        <div class="contact-content">
+            <div class="contact-info fade-in">
+                <h3 style="color: var(--primary-gold); margin-bottom: 2rem;">Contact Information</h3>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <strong>Location</strong><br>
+                        Sienipolku 10F-16<br>
+                        Naantali, 21110, Finland
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div>
+                        <strong>Mobile</strong><br>
+                        +358 41319 3113
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <div>
+                        <strong>Email</strong><br>
+                        mirony@hotmail.my
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">💼</div>
+                    <div>
+                        <strong>LinkedIn</strong><br>
+                        <a href="https://www.linkedin.com/in/mirony007" style="color: var(--primary-gold);">linkedin.com/in/mirony007</a>
+                    </div>
                 </div>
             </div>
-
-            <div class="skill-category fade-in">
-                <h3>Business & Consultancy</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">Restaurant Management</span>
-                    <span class="skill-tag">Operations Management</span>
-                    <span class="skill-tag">Staff Training</span>
-                    <span class="skill-tag">Business Development</span>
-                    <span class="skill-tag">Brand Strategy</span>
-                </div>
-            </div>
-
-            <div class="skill-category fade-in">
-                <h3>Technical Skills</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">Microsoft Office</span>
-                    <span class="skill-tag">Excel</span>
-                    <span class="skill-tag">Reports & Analysis</span>
-                    <span class="skill-tag">Computer Proficient</span>
-                </div>
-            </div>
-
-            <div class="skill-category fade-in">
-                <h3>Languages</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">English (Fluent)</span>
-                    <span class="skill-tag">Bengali (Fluent)</span>
-                    <span class="skill-tag">Hindi (Fluent)</span>
-                    <span class="skill-tag">Spanish (Good)</span>
-                    <span class="skill-tag">Malay (Good)</span>
-                </div>
+            
+            <div class="contact-form fade-in">
+                <h3 style="color: var(--primary-gold); margin-bottom: 2rem;">Send a Message</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="cta-button">Send Message</button>
+                </form>
             </div>
         </div>
     </section>
 
-    <section class="section" id="contact">
-        <h2 class="section-title">Contact</h2>
-        <div class="contact-grid">
-            <div class="contact-item">
-                <div class="contact-icon">📧</div>
-                <h3>Email</h3>
-                <p>mirony@hotmail.my</p>
-            </div>
-            <div class="contact-item">
-                <div class="contact-icon">📱</div>
-                <h3>Phone</h3>
-                <p>+358 44 92 333 10</p>
-            </div>
-            <div class="contact-item">
-                <div class="contact-icon">📍</div>
-                <h3>Location</h3>
-                <p>Sienipolku 10F-16<br>Naantali, 21110, Finland</p>
-            </div>
-            <div class="contact-item">
-                <div class="contact-icon">💼</div>
-                <h3>LinkedIn</h3>
-                <p><a href="https://www.linkedin.com/in/mirony007" target="_blank" style="color: var(--accent-warm); text-decoration: none;">linkedin.com/in/mirony007</a></p>
-            </div>
-        </div>
-    </section>
-
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2025 MD Mohibul Islam. All rights reserved.</p>
+        <p>&copy; 2025 MD Mohibul Islam. All rights reserved. | Crafting exceptional experiences in hospitality.</p>
     </footer>
 
     <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+                const offsetTop = target.offsetTop - 80;
+                
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
             });
         });
 
-        // Intersection Observer for fade-in animations
+        // Fade in animation on scroll
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
 
-        const observer = new IntersectionObserver((entries) => {
+        const observer = new IntersectionObserver(function(entries) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.animationPlayState = 'running';
+                    entry.target.classList.add('visible');
                 }
             });
         }, observerOptions);
 
-        // Observe all fade-in elements
         document.querySelectorAll('.fade-in').forEach(el => {
-            el.style.animationPlayState = 'paused';
             observer.observe(el);
         });
 
-        // Add active navigation highlighting
-        window.addEventListener('scroll', () => {
-            let current = '';
-            const sections = document.querySelectorAll('section');
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - 200)) {
-                    current = section.getAttribute('id');
-                }
-            });
+        // Mobile menu toggle (placeholder for future implementation)
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            // Add mobile menu functionality here
+            console.log('Mobile menu clicked');
+        });
 
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
+        // Form submission (placeholder)
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+        });
+
+        // Add some interactive hover effects
+        document.querySelectorAll('.timeline-item, .award-item, .skill-category').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.borderColor = 'var(--primary-gold)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.borderColor = 'rgba(212, 175, 55, 0.2)';
             });
         });
     </script>
