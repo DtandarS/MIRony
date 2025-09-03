@@ -1,815 +1,817 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MD Mohibul Islam - Mixologist & Restaurant Consultant</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
-
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-gold: #D4AF37;
-            --dark-bg: #1a1a1a;
-            --light-text: #f5f5f5;
-            --accent-gray: #2a2a2a;
-            --subtle-gray: #666;
-            --glass-bg: rgba(42, 42, 42, 0.8);
-        }
-
-        body {
-            font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-            color: var(--light-text);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(26, 26, 26, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: all 0.3s ease;
-        }
-
-        nav.scrolled {
-            background: rgba(26, 26, 26, 0.98);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-gold);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--light-text);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-gold);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary-gold);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Mobile menu */
-        .mobile-menu {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-        }
-
-        .mobile-menu span {
-            width: 25px;
-            height: 3px;
-            background: var(--light-text);
-            margin: 3px 0;
-            transition: 0.3s;
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(45, 45, 45, 0.9));
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 50%);
-            z-index: -1;
-        }
-
-        .hero-content h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--primary-gold), #f4e4a6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-content p {
-            font-size: clamp(1.1rem, 2vw, 1.3rem);
-            margin-bottom: 2rem;
-            color: var(--subtle-gray);
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: linear-gradient(45deg, var(--primary-gold), #f4e4a6);
-            color: var(--dark-bg);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
-        }
-
-        /* Section Styles */
-        .section {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            color: var(--primary-gold);
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: var(--primary-gold);
-        }
-
-        /* About Section */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-image {
-            width: 100%;
-            height: 400px;
-            background: var(--accent-gray);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: var(--subtle-gray);
-            border: 2px solid var(--primary-gold);
-        }
-        .profile-image{
-          width: 100%;
-          height 400px;
-        }
-
-        .about-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem;
-            background: var(--glass-bg);
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: var(--primary-gold);
-            display: block;
-        }
-
-        /* Experience Section */
-        .experience-timeline {
-            position: relative;
-            margin: 3rem 0;
-        }
-
-        .timeline-item {
-            background: var(--glass-bg);
-            padding: 2rem;
-            margin: 2rem 0;
-            border-radius: 15px;
-            border-left: 4px solid var(--primary-gold);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .timeline-item:hover {
-            transform: translateX(10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .timeline-date {
-            color: var(--primary-gold);
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-
-        .timeline-title {
-            font-size: 1.3rem;
-            margin: 0.5rem 0;
-            color: var(--light-text);
-        }
-
-        .timeline-company {
-            color: var(--subtle-gray);
-            margin-bottom: 1rem;
-        }
-
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-category {
-            background: var(--glass-bg);
-            padding: 2rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-        }
-
-        .skill-category h3 {
-            color: var(--primary-gold);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .skill-list {
-            list-style: none;
-        }
-
-        .skill-list li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .skill-list li:last-child {
-            border-bottom: none;
-        }
-
-        /* Awards Section */
-        .awards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .award-item {
-            background: var(--glass-bg);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .award-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .award-icon {
-            font-size: 3rem;
-            color: var(--primary-gold);
-            margin-bottom: 1rem;
-        }
-
-        /* Contact Section */
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-        }
-
-        .contact-info {
-            background: var(--glass-bg);
-            padding: 2rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-icon {
-            font-size: 1.5rem;
-            color: var(--primary-gold);
-            margin-right: 1rem;
-            width: 30px;
-        }
-
-        .email-text{
-          text-decoration: none;
-          color: white;
-        }
-
-        .phone-number{
-          text-decoration: none;
-          color: white;
-        }
-
-        .contact-form {
-            background: var(--glass-bg);
-            padding: 2rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--primary-gold);
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 8px;
-            color: var(--light-text);
-            font-family: inherit;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary-gold);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background: var(--dark-bg);
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu {
-                display: flex;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .contact-content {
-                grid-template-columns: 1fr;
-            }
-
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .section {
-                padding: 3rem 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            .nav-container {
-                padding: 0 1rem;
-            }
-        }
-
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
+
+  @import url('https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400..700&display=swap');
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Noto Sans JP", "sans-serif";
+  }
+
+  :root {
+    --primary-gold: #D4AF37;
+    --dark-bg: #1a1a1a;
+    --light-text: #f5f5f5;
+    --accent-gray: #2a2a2a;
+    --subtle-gray: #666;
+    --glass-bg: rgba(42, 42, 42, 0.8);
+  }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: var(--light-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Navigation */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    padding: 1rem 0;
+    transition: all 0.3s ease;
+  }
+
+  nav.scrolled {
+    background: rgba(26, 26, 26, 0.98);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-gold);
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+  }
+
+  .nav-links a {
+    color: var(--light-text);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .nav-links a:hover {
+    color: var(--primary-gold);
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-gold);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+
+  /* Mobile menu */
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+  }
+
+  .mobile-menu span {
+    width: 25px;
+    height: 3px;
+    background: var(--light-text);
+    margin: 3px 0;
+    transition: 0.3s;
+  }
+
+  /* Hero Section */
+  .hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(45, 45, 45, 0.9));
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 50%);
+  z-index: -1;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, var(--primary-gold), #f4e4a6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-content p {
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    margin-bottom: 2rem;
+    color: var(--subtle-gray);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: linear-gradient(45deg, var(--primary-gold), #f4e4a6);
+    color: var(--dark-bg);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+  }
+
+  .cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
+  }
+
+  /* Section Styles */
+  .section {
+    padding: 5rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--primary-gold);
+    position: relative;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--primary-gold);
+  }
+
+  /* About Section */
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .about-image {
+    width: 100%;
+    height: 400px;
+    background: var(--accent-gray);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--subtle-gray);
+    border: 2px solid var(--primary-gold);
+  }
+  .profile-image{
+    width: 100%;
+    height 400px;
+  }
+
+  .about-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .stat-item {
+    text-align: center;
+    padding: 2rem;
+    background: var(--glass-bg);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-gold);
+    display: block;
+  }
+
+  /* Experience Section */
+  .experience-timeline {
+    position: relative;
+    margin: 3rem 0;
+  }
+
+  .timeline-item {
+    background: var(--glass-bg);
+    padding: 2rem;
+    margin: 2rem 0;
+    border-radius: 15px;
+    border-left: 4px solid var(--primary-gold);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+  }
+
+  .timeline-item:hover {
+    transform: translateX(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .timeline-date {
+    color: var(--primary-gold);
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+
+  .timeline-title {
+    font-size: 1.3rem;
+    margin: 0.5rem 0;
+    color: var(--light-text);
+  }
+
+  .timeline-company {
+    color: var(--subtle-gray);
+    margin-bottom: 1rem;
+  }
+
+  /* Skills Section */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .skill-category {
+    background: var(--glass-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+  }
+
+  .skill-category h3 {
+    color: var(--primary-gold);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+  }
+
+  .skill-list {
+    list-style: none;
+  }
+
+  .skill-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .skill-list li:last-child {
+    border-bottom: none;
+  }
+
+  /* Awards Section */
+  .awards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .award-item {
+    background: var(--glass-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .award-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .award-icon {
+    font-size: 3rem;
+    color: var(--primary-gold);
+    margin-bottom: 1rem;
+  }
+
+  /* Contact Section */
+  .contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .contact-info {
+    background: var(--glass-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-icon {
+    font-size: 1.5rem;
+    color: var(--primary-gold);
+    margin-right: 1rem;
+    width: 30px;
+  }
+
+  .email-text{
+    text-decoration: none;
+    color: white;
+  }
+
+  .phone-number{
+    text-decoration: none;
+    color: white;
+  }
+
+  .contact-form {
+    background: var(--glass-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--primary-gold);
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 8px;
+    color: var(--light-text);
+    font-family: inherit;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-gold);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    background: var(--dark-bg);
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+    }
+
+    .mobile-menu {
+      display: flex;
+    }
+
+    .about-content {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .contact-content {
+      grid-template-columns: 1fr;
+    }
+
+    .stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .section {
+      padding: 3rem 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .stats {
+      grid-template-columns: 1fr;
+    }
+
+    .nav-container {
+      padding: 0 1rem;
+    }
+  }
+
+  /* Scroll animations */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Navigation -->
     <nav id="navbar">
-        <div class="nav-container">
-            <a href="#home" class="logo">MI</a>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#awards">Awards</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="mobile-menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+      <div class="nav-container">
+        <a href="#home" class="logo">MI</a>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#awards">Awards</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="mobile-menu">
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
+      </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-content fade-in">
-            <h1>MD Mohibul Islam</h1>
-            <p>Innovative Mixologist & Restaurant Consultant</p>
-            <p>Over a decade of experience crafting exceptional experiences in the F&B industry</p>
-            <a href="#contact" class="cta-button">Let's Work Together</a>
-        </div>
+      <div class="hero-content fade-in">
+        <h1>MD Mohibul Islam</h1>
+        <p>Innovative Mixologist & Restaurant Consultant</p>
+        <p>Over a decade of experience crafting exceptional experiences in the F&B industry</p>
+        <a href="#contact" class="cta-button">Let's Work Together</a>
+      </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="section">
-        <h2 class="section-title fade-in">About Me</h2>
-        <div class="about-content">
-            <div class="about-image fade-in">
-              <img class="profile-image"src="./resources/ProfileImage.png">
-            </div>
-            <div class="about-text fade-in">
-                <p>Innovative restauranteur and mixologist with over a decade of experience in the food and beverage industry, specializing in crafting innovative cocktails and providing comprehensive consultancy services to restaurants and bars.</p>
-                
-                <p>Renowned for a minimalistic yet elegant approach to drink design and a deep understanding of flavor profiles, which has significantly enhanced customer satisfaction and business growth. My proven track record spans menu development, staff training, and operational improvements, coupled with a strategic mindset aimed at elevating the dining experience.</p>
-                
-                <p>Currently serving as Food & Beverage Specialist and Restaurant Manager at Sunborn Saga Oy in Finland, I continue to push boundaries in hospitality excellence.</p>
-            </div>
+      <h2 class="section-title fade-in">About Me</h2>
+      <div class="about-content">
+        <div class="about-image fade-in">
+          <img class="profile-image"src="./resources/ProfileImage.png">
         </div>
-        
-        <div class="stats fade-in">
-            <div class="stat-item">
-                <span class="stat-number">10+</span>
-                Years Experience
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">15+</span>
-                Establishments Consulted
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">5</span>
-                Languages Spoken
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">50+</span>
-                Signature Cocktails
-            </div>
+        <div class="about-text fade-in">
+          <p>Innovative restauranteur and mixologist with over a decade of experience in the food and beverage industry, specializing in crafting innovative cocktails and providing comprehensive consultancy services to restaurants and bars.</p>
+
+          <p>Renowned for a minimalistic yet elegant approach to drink design and a deep understanding of flavor profiles, which has significantly enhanced customer satisfaction and business growth. My proven track record spans menu development, staff training, and operational improvements, coupled with a strategic mindset aimed at elevating the dining experience.</p>
+
+          <p>Currently serving as Food & Beverage Specialist and Restaurant Manager at Sunborn Saga Oy in Finland, I continue to push boundaries in hospitality excellence.</p>
         </div>
+      </div>
+
+      <div class="stats fade-in">
+        <div class="stat-item">
+          <span class="stat-number">10+</span>
+          Years Experience
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">15+</span>
+          Establishments Consulted
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">5</span>
+          Languages Spoken
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">50+</span>
+          Signature Cocktails
+        </div>
+      </div>
     </section>
 
     <!-- Experience Section -->
     <section id="experience" class="section">
-        <h2 class="section-title fade-in">Professional Experience</h2>
-        <div class="experience-timeline">
-            <div class="timeline-item fade-in">
-                <div class="timeline-date">07/2024 - Present</div>
-                <h3 class="timeline-title">Food & Beverage Specialist, Restaurant Manager</h3>
-                <div class="timeline-company">Sunborn Saga Oy (Naantali Hotel & Spa) | Finland</div>
-                <p>Leading F&B operations at a premier hotel and spa, focusing on delivering exceptional guest experiences and operational excellence.</p>
-            </div>
-            
-            <div class="timeline-item fade-in">
-                <div class="timeline-date">04/2023 - Present</div>
-                <h3 class="timeline-title">Founder & Head Consultant</h3>
-                <div class="timeline-company">Mixed It Right | Bar & Restaurant Consultancy | Malaysia</div>
-                <p>Providing comprehensive consultancy services to restaurants and bars across Malaysia, specializing in menu development, operations optimization, and staff training.</p>
-            </div>
-            
-            <div class="timeline-item fade-in">
-                <div class="timeline-date">10/2020 - 12/2023</div>
-                <h3 class="timeline-title">Founder & Head of Culinary</h3>
-                <div class="timeline-company">Canvass Bistro & Cocktail Bar | Kuala Lumpur</div>
-                <p>Established and operated a successful bistro and cocktail bar, recognized for innovative cocktails and sustainable practices.</p>
-            </div>
-            
-            <div class="timeline-item fade-in">
-                <div class="timeline-date">07/2022 - 12/2023</div>
-                <h3 class="timeline-title">Brand Ambassador</h3>
-                <div class="timeline-company">Husk Distillers "Ink Gin" | Malaysia & Thailand</div>
-                <p>Represented premium gin brand across Southeast Asia, conducting masterclasses and developing market presence.</p>
-            </div>
-            
-            <div class="timeline-item fade-in">
-                <div class="timeline-date">07/2015 - 03/2020</div>
-                <h3 class="timeline-title">Restaurant, Bar Manager & Head Mixologist</h3>
-                <div class="timeline-company">Pinchos Tapas Bar | Kuala Lumpur</div>
-                <p>Progressed from bartender to head mixologist and bar manager, developing innovative cocktail programs and managing operations.</p>
-            </div>
+      <h2 class="section-title fade-in">Professional Experience</h2>
+      <div class="experience-timeline">
+        <div class="timeline-item fade-in">
+          <div class="timeline-date">07/2024 - Present</div>
+          <h3 class="timeline-title">Food & Beverage Specialist, Restaurant Manager</h3>
+          <div class="timeline-company">Sunborn Saga Oy (Naantali Hotel & Spa) | Finland</div>
+          <p>Leading F&B operations at a premier hotel and spa, focusing on delivering exceptional guest experiences and operational excellence.</p>
         </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-date">04/2023 - Present</div>
+          <h3 class="timeline-title">Founder & Head Consultant</h3>
+          <div class="timeline-company">Mixed It Right | Bar & Restaurant Consultancy | Malaysia</div>
+          <p>Providing comprehensive consultancy services to restaurants and bars across Malaysia, specializing in menu development, operations optimization, and staff training.</p>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-date">10/2020 - 12/2023</div>
+          <h3 class="timeline-title">Founder & Head of Culinary</h3>
+          <div class="timeline-company">Canvass Bistro & Cocktail Bar | Kuala Lumpur</div>
+          <p>Established and operated a successful bistro and cocktail bar, recognized for innovative cocktails and sustainable practices.</p>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-date">07/2022 - 12/2023</div>
+          <h3 class="timeline-title">Brand Ambassador</h3>
+          <div class="timeline-company">Husk Distillers "Ink Gin" | Malaysia & Thailand</div>
+          <p>Represented premium gin brand across Southeast Asia, conducting masterclasses and developing market presence.</p>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-date">07/2015 - 03/2020</div>
+          <h3 class="timeline-title">Restaurant, Bar Manager & Head Mixologist</h3>
+          <div class="timeline-company">Pinchos Tapas Bar | Kuala Lumpur</div>
+          <p>Progressed from bartender to head mixologist and bar manager, developing innovative cocktail programs and managing operations.</p>
+        </div>
+      </div>
     </section>
 
     <!-- Skills Section -->
     <section id="skills" class="section">
-        <h2 class="section-title fade-in">Expertise</h2>
-        <div class="skills-grid">
-            <div class="skill-category fade-in">
-                <h3>Mixology & Beverage</h3>
-                <ul class="skill-list">
-                    <li>Craft Cocktail Development</li>
-                    <li>Molecular Mixology</li>
-                    <li>Wine & Spirits Knowledge</li>
-                    <li>Menu Engineering</li>
-                    <li>Flavor Profiling</li>
-                </ul>
-            </div>
-            
-            <div class="skill-category fade-in">
-                <h3>Consultancy</h3>
-                <ul class="skill-list">
-                    <li>Restaurant Operations</li>
-                    <li>Staff Training & Development</li>
-                    <li>Menu Development</li>
-                    <li>Cost Optimization</li>
-                    <li>Brand Development</li>
-                </ul>
-            </div>
-            
-            <div class="skill-category fade-in">
-                <h3>Management</h3>
-                <ul class="skill-list">
-                    <li>Operations Management</li>
-                    <li>Team Leadership</li>
-                    <li>Customer Service</li>
-                    <li>Quality Control</li>
-                    <li>Strategic Planning</li>
-                </ul>
-            </div>
-            
-            <div class="skill-category fade-in">
-                <h3>Languages</h3>
-                <ul class="skill-list">
-                    <li>English - Fluent</li>
-                    <li>Bengali - Native</li>
-                    <li>Hindi - Fluent</li>
-                    <li>Spanish - Good</li>
-                    <li>Malay - Good</li>
-                </ul>
-            </div>
+      <h2 class="section-title fade-in">Expertise</h2>
+      <div class="skills-grid">
+        <div class="skill-category fade-in">
+          <h3>Mixology & Beverage</h3>
+          <ul class="skill-list">
+            <li>Craft Cocktail Development</li>
+            <li>Molecular Mixology</li>
+            <li>Wine & Spirits Knowledge</li>
+            <li>Menu Engineering</li>
+            <li>Flavor Profiling</li>
+          </ul>
         </div>
+
+        <div class="skill-category fade-in">
+          <h3>Consultancy</h3>
+          <ul class="skill-list">
+            <li>Restaurant Operations</li>
+            <li>Staff Training & Development</li>
+            <li>Menu Development</li>
+            <li>Cost Optimization</li>
+            <li>Brand Development</li>
+          </ul>
+        </div>
+
+        <div class="skill-category fade-in">
+          <h3>Management</h3>
+          <ul class="skill-list">
+            <li>Operations Management</li>
+            <li>Team Leadership</li>
+            <li>Customer Service</li>
+            <li>Quality Control</li>
+            <li>Strategic Planning</li>
+          </ul>
+        </div>
+
+        <div class="skill-category fade-in">
+          <h3>Languages</h3>
+          <ul class="skill-list">
+            <li>English - Fluent</li>
+            <li>Bengali - Native</li>
+            <li>Hindi - Fluent</li>
+            <li>Spanish - Good</li>
+            <li>Malay - Good</li>
+          </ul>
+        </div>
+      </div>
     </section>
 
     <!-- Awards Section -->
     <section id="awards" class="section">
-        <h2 class="section-title fade-in">Recognition & Awards</h2>
-        <div class="awards-grid">
-            <div class="award-item fade-in">
-                <div class="award-icon">🏆</div>
-                <h3>Bartender of the Year 2023</h3>
-                <p>Recognized by The Panda Bartender for excellence in mixology and innovation in the global bartending community.</p>
-            </div>
-            
-            <div class="award-item fade-in">
-                <div class="award-icon">⭐</div>
-                <h3>The Original Rebels 2023</h3>
-                <p>Featured by The Glenlivet as one of "The Original Rebels 2023" for pioneering spirit in mixology and bar consultancy.</p>
-            </div>
-            
-            <div class="award-item fade-in">
-                <div class="award-icon">🌱</div>
-                <h3>Top Sustainable Bars</h3>
-                <p>Listed among "Top 4 Sustainable Bars in Malaysia" by Timeout Asia and "Top 6 Sustainable Bars in Kuala Lumpur" by First-class Malaysia.</p>
-            </div>
+      <h2 class="section-title fade-in">Recognition & Awards</h2>
+      <div class="awards-grid">
+        <div class="award-item fade-in">
+          <div class="award-icon">🏆</div>
+          <h3>Bartender of the Year 2023</h3>
+          <p>Recognized by The Panda Bartender for excellence in mixology and innovation in the global bartending community.</p>
         </div>
+
+        <div class="award-item fade-in">
+          <div class="award-icon">⭐</div>
+          <h3>The Original Rebels 2023</h3>
+          <p>Featured by The Glenlivet as one of "The Original Rebels 2023" for pioneering spirit in mixology and bar consultancy.</p>
+        </div>
+
+        <div class="award-item fade-in">
+          <div class="award-icon">🌱</div>
+          <h3>Top Sustainable Bars</h3>
+          <p>Listed among "Top 4 Sustainable Bars in Malaysia" by Timeout Asia and "Top 6 Sustainable Bars in Kuala Lumpur" by First-class Malaysia.</p>
+        </div>
+      </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact" class="section">
-        <h2 class="section-title fade-in">Get In Touch</h2>
-        <div class="contact-content">
-            <div class="contact-info fade-in">
-                <h3 style="color: var(--primary-gold); margin-bottom: 2rem;">Contact Information</h3>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">📍</div>
-                    <div>
-                        <strong>Location</strong><br>
-                        Sienipolku 10F-16<br>
-                        Naantali, 21110, Finland
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">📱</div>
-                    <div>
-                        <strong>Mobile</strong><br>
-                        <a href="tel:+358413193113" class="phone-number">+358 41319 3113</a>
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">✉️</div>
-                    <div>
-                        <strong>Email</strong><br>
-                        <a href="mailto:mirony@hotmail.my" class="email-text">M.I. Rony</a>
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">💼</div>
-                    <div>
-                        <strong>LinkedIn</strong><br>
-                        <a target="blank" href="https://www.linkedin.com/in/mirony007" style="color: var(--primary-gold);">MIRony007</a>
-                    </div>
-                </div>
+      <h2 class="section-title fade-in">Get In Touch</h2>
+      <div class="contact-content">
+        <div class="contact-info fade-in">
+          <h3 style="color: var(--primary-gold); margin-bottom: 2rem;">Contact Information</h3>
+
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <strong>Location</strong><br>
+              Sienipolku 10F-16<br>
+              Naantali, 21110, Finland
             </div>
-            
-            <div class="contact-form fade-in">
-                <h3 style="color: var(--primary-gold); margin-bottom: 2rem;">Send a Message</h3>
-                <form>
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" name="subject">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="5" required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="cta-button">Send Message</button>
-                </form>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">📱</div>
+            <div>
+              <strong>Mobile</strong><br>
+              <a href="tel:+358413193113" class="phone-number">+358 41319 3113</a>
             </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <strong>Email</strong><br>
+              <a href="mailto:mirony@hotmail.my" class="email-text">M.I. Rony</a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">💼</div>
+            <div>
+              <strong>LinkedIn</strong><br>
+              <a target="blank" href="https://www.linkedin.com/in/mirony007" style="color: var(--primary-gold);">MIRony007</a>
+            </div>
+          </div>
         </div>
+
+        <div class="contact-form fade-in">
+          <h3 style="color: var(--primary-gold); margin-bottom: 2rem;">Send a Message</h3>
+          <form>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject">
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+
+            <button type="submit" class="cta-button">Send Message</button>
+          </form>
+        </div>
+      </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 MD Mohibul Islam. All rights reserved. | Crafting exceptional experiences in hospitality.</p>
+      <p>&copy; 2025 MD Mohibul Islam. All rights reserved. | Crafting exceptional experiences in hospitality.</p>
     </footer>
 
     <script>
-        // Navigation scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
+      // Navigation scroll effect
+      window.addEventListener('scroll', function() {
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY > 100) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          const offsetTop = target.offsetTop - 80;
+
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+        });
+      });
+
+      // Fade in animation on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.fade-in').forEach(el => {
+        observer.observe(el);
+      });
+
+      // Mobile menu toggle (placeholder for future implementation)
+      document.querySelector('.mobile-menu').addEventListener('click', function() {
+        // Add mobile menu functionality here
+        console.log('Mobile menu clicked');
+      });
+
+      // Form submission (placeholder)
+      document.querySelector('form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Thank you for your message! I will get back to you soon.');
+      });
+
+      // Add some interactive hover effects
+      document.querySelectorAll('.timeline-item, .award-item, .skill-category').forEach(item => {
+        item.addEventListener('mouseenter', function() {
+          this.style.borderColor = 'var(--primary-gold)';
         });
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                const offsetTop = target.offsetTop - 80;
-                
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-            });
+        item.addEventListener('mouseleave', function() {
+          this.style.borderColor = 'rgba(212, 175, 55, 0.2)';
         });
-
-        // Fade in animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Mobile menu toggle (placeholder for future implementation)
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            // Add mobile menu functionality here
-            console.log('Mobile menu clicked');
-        });
-
-        // Form submission (placeholder)
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your message! I will get back to you soon.');
-        });
-
-        // Add some interactive hover effects
-        document.querySelectorAll('.timeline-item, .award-item, .skill-category').forEach(item => {
-            item.addEventListener('mouseenter', function() {
-                this.style.borderColor = 'var(--primary-gold)';
-            });
-            
-            item.addEventListener('mouseleave', function() {
-                this.style.borderColor = 'rgba(212, 175, 55, 0.2)';
-            });
-        });
+      });
     </script>
-</body>
+  </body>
 </html>
